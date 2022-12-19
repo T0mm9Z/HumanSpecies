@@ -14,6 +14,16 @@
 class Human
 {
   public:
+
+	enum class ANCESTRY
+	{
+	  ASIAN,
+	  AMERICA,
+	  AFRICA,
+	  AUSTRALIA,
+	  EUROPE
+	};
+
 	enum class EYECOLOR
 	{
 	  GREEN, BLUE, BROWN, GREY
@@ -30,41 +40,42 @@ class Human
 	};
 
 	Human ()
-		: age_ (20), height_ (175), weight_ (75), ecolor_ (EYECOLOR::BLUE), gender_ (GENDER::MALE), name_ ("defautl-name"), hcolor_ (HAIRCOLOR::BROWN)
+		: age_ (20), height_ (175), weight_ (75), ecolor_ (EYECOLOR::BLUE), gender_ (GENDER::MALE), hcolor_ (HAIRCOLOR::BROWN), ancestry_ (ANCESTRY::EUROPE)
 	{
 	}
 
-	Human (uint8_t age, uint8_t height, uint16_t weight, EYECOLOR ecolor, GENDER gender)
-		: age_ (20), height_ (175), weight_ (75), ecolor_ (EYECOLOR::BLUE), gender_ (GENDER::MALE), name_ ("default-name"), hcolor_ (HAIRCOLOR::BROWN)
+	Human (uint8_t age, uint8_t height, uint16_t weight, EYECOLOR ecolor, GENDER gender, HAIRCOLOR hcolor, ANCESTRY ancestry)
+		: age_ (age), height_ (height), weight_ (weight), ecolor_ (ecolor), gender_ (gender), hcolor_ (hcolor), ancestry_ (ancestry)
 	{
 	}
 
 	virtual ~Human ();
 
-	void setAge (uint8_t age){age_ = age;}
-	void setHeight (uint8_t height){height_ = height;}
-	void setWeight (uint8_t weight){weight_ = weight;}
-	void setEyeColor (EYECOLOR ecolor){ecolor_ = ecolor;}
-	void setGender (GENDER gender){gender_ = gender;}
-	void setName (std::string name){name_ = name;}
-	void setHairColor (HAIRCOLOR hcolor){hcolor_ = hcolor;}
+	virtual void setAge (uint8_t age) = 0;
+	virtual void setHeight (uint8_t height) = 0;
+	virtual void setWeight (uint8_t weight) = 0;
+	virtual void setEyeColor (EYECOLOR ecolor) = 0;
+	virtual void setGender (GENDER gender) = 0;
+	virtual void setHairColor (HAIRCOLOR hcolor) = 0;
+	virtual void setAncestry (ANCESTRY ancestry) = 0;
 
-	uint8_t getAge (){return age_;}
-	uint8_t getHeight (){return height_;}
-	uint16_t getWeight (){return weight_;}
-	EYECOLOR getEyeColor (){return ecolor_;}
-	GENDER getGender (){return gender_ ;}
-	std::string getName (){return name_;}
-	HAIRCOLOR getHairColor (){return hcolor_;}
+	virtual uint8_t getAge () = 0;
+	virtual uint8_t getHeight () = 0;
+	virtual uint16_t getWeight () = 0;
+	virtual EYECOLOR getEyeColor () = 0;
+	virtual GENDER getGender () = 0;
+	virtual HAIRCOLOR getHairColor () = 0;
+	virtual ANCESTRY getAncestry () = 0;
 
-  private:
+  protected:
+
 	uint8_t age_;
 	uint8_t height_;
 	uint16_t weight_;
 	EYECOLOR ecolor_;
 	GENDER gender_;
-	std::string name_;
 	HAIRCOLOR hcolor_;
+	ANCESTRY ancestry_;
 };
 
 #endif /* HUMAN_H_ */
